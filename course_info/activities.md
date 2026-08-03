@@ -20,4 +20,7 @@
 3. _Demo_: Basic Git workflows.
 4. _Practice_: [Learn Git](../exercises/learn-git.md)
 5. [_Quiz_](https://vevox.app/#/m/136262325)
-
+6. _Demo_: NumPy fundamentals [depending on the time and class energy]
+7. _Practice_: [Basic and not-so-basic NumPy](../exercises/basic-and-not-so-basic-numpy.md)  
+   and/or start working on  
+   _Mini-project_: [Program a quantum circuit simulator](../exercises/quantum-circuit-simulator.md)
