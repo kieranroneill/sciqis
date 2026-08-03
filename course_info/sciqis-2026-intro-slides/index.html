@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/solarized.css" id="theme" />
+
+    <link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# SCIQIS
+
+Scientific computing in quantum information science
+
+_DTU, August 2026_
+
+<img src="Attachments/giphy-sciqis-title.gif" alt="" style="width: 500px; object-fit: fill">
+</div></script></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## This course
+
+* 3 week course - full-time work!
+* Make use of the surroundings
+<br ></br>
+  
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Third time running – still very much work in progress
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->7 → 18 → 27 students (with a cap of 20...)
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Let's see how it goes...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## TOC
+
+* What is scientific computing?
+* Me and you
+* Course overview
+* Tools
+</div></script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Scientific computing
+
+**doing computing for science**
+
+or
+
+**doing science with computers**
+
+or ...?
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+3 primary methods in physics:
+
+1. Theoretical modeling
+2. Experiments
+3. Numerical simulation
+
+(+ observation: not in quantum)
+</div>
+
+<aside class="notes"><p>All three (may) use computers:</p>
+<ol>
+<li>Mathematica</li>
+<li>Data analysis, experiment control</li>
+<li>Well...</li>
+</ol>
+</aside></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+Experience from QPIT labs
+
+<img src="Attachments/qpit-lab.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/quantum-learning-paper.png" alt="" style="object-fit: scale-down">
+
+
+* [arXiv:2502.07770](https://arxiv.org/abs/2502.07770) / [Science 389, 6767](https://www.science.org/doi/10.1126/science.adv2560)
+* [github.com/qpit/ee-dl](https://github.com/qpit/ee-dl/tree/plots) (not public)
+* [DTU Data](https://data.dtu.dk/articles/dataset/Data_and_code_for_Quantum_learning_advantage_on_a_scalable_photonic_platform_/29517107)
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<split even>
+<img src="Attachments/qpit-github-repos.png" alt="" style="object-fit: scale-down">
+
+
+<div class="block">
+
+[github.com/qpit](https://github.com/orgs/qpit/repositories)
+
+</div>
+
+
+</split>
+</div></script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Me and you
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Me
+
+* Trained as quantum optics experimentalist at NBI 🪞🔧🔦
+* At DTU since 2011 after 3 years at NICT, Tokyo 🇩🇰>🇯🇵>🇩🇰
+* Currently supervising ~20 PhDs and postdocs 🎓 (all using code)
+* Happy when coding 😃 (but not much time these days 😢)
+
+<img src="Attachments/xkcd-code-quality.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### My coding experience
+
+- teenager: Visual Basic
+- high school: TI-92 calculator
+- 1st year @ KU: Fortran
+- bachelor: Matlab
+- MSc, PhD: Mathematica
+
+<img src="Attachments/ti92-calculator.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/fortran-punchcard.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/xkcd-old-days.png" alt="" style="width: 652px; object-fit: fill">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### My coding experience
+
+Since 2009: Python
+
+<img src="Attachments/python-logo.png" alt="" style="object-fit: scale-down">
+
+
+But... I'm a **physicist**, not a programmer/developer/software engineer: 
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Code is a tool, not the job
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Thinking + doing physics, supervising students, teaching, admin... ⇒ non-existing time to study + train best software practice
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Often, scientific code is a one-off thing, so quality doesn't matter too much  
+  [or does it? - point for discussion]
+
+Result: ~17 years experience of writing (bad) Python code 💩 <!-- .element: class="fragment" -->
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### You?
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### What you can expect from me:
+
+* Insights (but little expertise) in many aspects of Python and application to quantum information and quantum optics
+* Half-finished 😰 lectures and tutorials
+* Availability for in-person and all-class guidance
+* Enthusiasm for the subject
+* Desire for you to learn
+* Openness to learn from you
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### I expect from you:
+
+- Experience with Python (different levels)
+- Familiarity with
+    - quantum mechanics
+    - (ideally) quantum information / quantum optics
+- Curiosity and eagerness
+- Looking up docs, guides, tutorials, videos, GenAI as needed
+- Willingness to share with and to learn from others
+- Dedication to learn
+</div></script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Course overview
+
+* short intros
+* lots of work on your own
+* much interaction (with me and fellow students)
+* learn by doing - and sharing
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Focus on <u>DOING</u>
+
+* creating your own code
+* finding and studying resources (physics and computing) yourself
+* explore a topic as broadly or deeply as you wish
+* not much focus on special-purpose packages (QuTiP is an exception because of its general utility)
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Course material and communication
+
+* DTU Learn:  
+  not so much (if at all)
+* Discord:  
+  messages from me, communication among yourselves and with me
+* [github.com/qpit/sciqis](https://github.com/qpit/sciqis):  
+  all course materials
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Tentative schedule
+
+| day   | date    | activity / theme                                                        | physics                                               |
+| ----- | ------- | ----------------------------------------------------------------------- | ----------------------------------------------------- |
+| 1     | 3/8     | intro to course and to scientific computing;<br>environments, workflows |                                                       |
+| 2     | 4/8     | version control<br ></br>NumPy                                              | qubits, quantum circuit simulation                    |
+| 3     | 5/8     | more NumPy                                                              | quantum circuit simulation<br>random circuit sampling |
+| 4     | 6/8     | visualisation                                                           | continuous-variable states                            |
+| 5     | 7/8     | QuTiP;<br>profiling code                                                | continuous-variable states<br>cavity QED              |
+| 6     | 10/8    | data analysis;<br>file I/O                                              | realistic squeezed light                              |
+| 7     | 11/8    | packaging<br>speeding up<br>other relevant packages and tools           | teleportation simulation                              |
+| 8     | 12/8    | guided mini-project:<br ></br>modeling, simulation, analysis, presentation  | quantum state generation + tomography                 |
+| 9–13  | 13–19/8 | Project work                                                            | your choice!                                          |
+| 14–15 | 20–21/8 | Project presentations + feedback                                        |                                                       |
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Daily activities days 1—8
+
+Loose schedule:
+
+* Pre-planned lecture mixed with live coding examples
+	* supposed to be interactive - please interrupt and engage!
+	* you can also add comments, questions and related info on the [#discussion channel at Discord](https://discordapp.com/channels/1527267313563205773/1527276103339872447)
+* Most of the day: work on your own
+	* study tutorials while coding along
+	* solve open-ended exercises
+* Ad-hoc full-class sessions
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Daily activities days 1—8
+
+* While working: discuss with your neighbours
+* Come and go as you like, but don't stray far away
+* I will be available most of the time 9—12 and 13—16, but will have to leave for some meetings
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Project work 
+
+* Starting Thursday of week 2, you will start working ~~individually or~~ in pairs on one large project.
+* You MUST
+	* make use of several of the computing topics covered in class
+	* create a program/simulation/numerical study with direct relation or application to quantum information science
+	* document your code well ­– it must be understandable by others
+	* keep tight version control
+* Apart from that, you are quite free to do what you like – and can incorporate methods, packages etc. that we haven't covered
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Deliverable + assessment
+
+The assessment of the course (pass/fail) is based on the project work.
+
+* Your code should be
+	* more or less complete by end of Wednesday of week 3
+	* publicly available on Github (good for your CV!)
+	* be documented so your classmates can understand and run it
+* You should present your project in 15 minutes on Thursday or Friday of week 3
+* You should review and give feedback on a few classmates' project
+
+**You will pass the course by completing these three items satisfactorily**
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### This class is a safe space
+
+Your passing or failing is in no way affected by your performance on the non-project work. 
+
+There are no stupid questions!
+
+It is not hard to pass this course: No assesment of how "good" you are at the end – but you must make a serious effort to learn as much as you can.
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Be excellent to each other
+
+You have very different backgrounds and skill levels.
+
+If things get too easy:  
+go ahead and study advanced aspects of the day's topic.
+
+If things get too hard:  
+ask - me, your neighbour, on Discord.
+
+Help each other learn.
+
+<img src="Attachments/giphy-be-excellent.gif" alt="Be excellent to each other" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Missing topics
+
+We could also have covered 
+* Pandas
+* SymPy
+* high-performance computing
+* test-driven development
+* optimisation (cvxpy) 
+* machine learning
+* Qiskit, other quantum computer SDKs
+* instrument control
+* etc...
+
+– but we (probably) won't!
+
+Software engineering – even when restricted to scientific computing – is a massive field.
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+The quantum information topics are also highly selective  
+(loosely based on what I know best).
+
+The main things, I hope you take away, are 
+- a few tools in your belt
+- a can-do attitude towards attacking scientific and engineering problems with code
+- a feeling of knowing how to learn more
+</div></script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Tools
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/giphy-terminal.gif" alt="Terminal" style="object-fit: scale-down">
+
+don't fear the terminal
+
+on Windows: probably go with WSL
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/python-logo.png" alt="" style="object-fit: scale-down">
+
+
+alternatives: Julia, Matlab, Mathematica, C++, R, JavaScript, ...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/numpy-logo.png" alt="" style="object-fit: scale-down">
+
+
+alternatives: no
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/matplotlib-logo.png" alt="" style="object-fit: scale-down">
+
+
+alternatives: Plotly, ggplot, Bokeh, ...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/jupyter-logo.png" alt="" style="object-fit: scale-down">
+
+
+alternatives: .ipynb files can be opened in VS Code, PyCharm, Google Colab, etc.
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/vscode-logo.png" alt="" style="object-fit: scale-down">
+
+alternatives: PyCharm, Spyder, Emacs, Vim/Neovim, Sublime Text, ...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/git-logo.png" alt="" style="object-fit: scale-down">
+
+
+alternatives: ~SVN~, ~Mercurial~ [(94%/5%/1% in 2023)](https://stackoverflow.blog/2023/01/09/beyond-git-the-other-version-control-systems-developers-use/)
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/github-logo.png" alt="" style="object-fit: scale-down">
+
+alternatives: Gitlab, Bitbucket
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/uv-logo.png" alt="" style="object-fit: scale-down">
+
+**uv**
+
+alternatives: pip + venv, conda, Poetry, Pipenv, ...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/xkcd-python-environment.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/wigner-function.png" alt="" style="object-fit: scale-down">
+
+
+**QuTiP**
+
+alternatives: QuantumOptics.jl and (depending on application) Qiskit, Cirq, Strawberry Fields, etc...
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/discord-logo.png" alt="" style="object-fit: scale-down">
+</div></script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="Attachments/genai-elephant.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### The elephant in the room
+
+What do we do about GenAI? 
+
+What do YOU do?
+
+Is this course relevant to you at all?
+
+[ _Afternoon discussion session_ ]
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Survey
+
+https://vevox.app
+
+Session ID: 136-262-325
+
+<img src="Attachments/vevox-qr.png" alt="" style="object-fit: scale-down">
+</div></script></section></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/obsidian-markdown.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/reveal-pointer/pointer.js"></script>
+
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            // normalize to rgb(a)
+            const optionEl = document.createElement("option");
+            optionEl.style.color = color;
+            const normalizedColor = optionEl.style.color;
+
+            const match = normalizedColor.match(/(\d+), (\d+), (\d+)/);
+            if (!match) return false;
+            const [, c_r, c_g, c_b] = match;
+
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                ObsidianMarkdown,
+                RevealZoom,
+                RevealNotes,
+                RevealPointer,
+            ],
+            allottedTime: "120",
+
+            markdown: {
+                gfm: true,
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"default","width":"1280","height":"720","margin":0.04}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+    <!-- created with Slides Extended reveal.html template -->
+</body>
+</html>
