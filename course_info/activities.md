@@ -18,10 +18,20 @@
 1. Follow-up on yesterday
 2. Qubits and gates super-fast recap
 2. _Peer instruction_: Explain the basic Git concepts
-3. _Demo_: Basic Git workflows.
+3. _Demo_: Basic Git workflows
 4. _Practice_: [Learn Git](../exercises/learn-git.md)
 5. [_Quiz_](https://vevox.app/#/m/136262325)
 6. _Demo_: NumPy fundamentals [depending on the time and class energy]
 7. _Practice_: [Basic and not-so-basic NumPy](../exercises/basic-and-not-so-basic-numpy.md)  
    and/or start working on  
    _Mini-project_: [Program a quantum circuit simulator](../exercises/quantum-circuit-simulator.md)
+
+## Day 3
+
+1. Follow-up on yesterday
+2. [_Quiz_](https://vevox.app/#/m/136262325)
+3. _Demo_: Einstein summation in NumPy
+4. _Mini-project_: Continue developing your [quantum circuit simulator](../exercises/quantum-circuit-simulator.md)
+   - For those not sure how to get started, I will do a support session at the board
+5. _Demo_: Classes in Python
+6. _Practice_: Try other circuit simulators - instructions TBA
