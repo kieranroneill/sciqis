@@ -16,6 +16,7 @@
 ## Day 2
 
 1. Follow-up on yesterday
+2. Qubits and gates super-fast recap
 2. _Peer instruction_: Explain the basic Git concepts
 3. _Demo_: Basic Git workflows.
 4. _Practice_: [Learn Git](../exercises/learn-git.md)
