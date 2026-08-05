@@ -1,5 +1,7 @@
 # Compare quantum circuit simulators
 
+_Practice_
+
 You've worked on building your own quantum circuit simulator, which will now be in a more-or-less functional state. I encourage you to keep working on it for the learning outcome. However, there exist of course already a ton of other simulators. 
 
 If you were given the task by a supervisor or employer to start investigating variational quantum circuits, e.g. for quantum chemistry applications, you would at some point want to simulate a wide range of different parametrized circuits. In parametrized circuits, some of the gates are variable, such as the $R_x(\theta), R_y(\theta), R_z(\theta)$ gates. These parameters would typically be optimised by a classical optimiser using outcomes of the quantum circuit as the cost function to be minimised. 

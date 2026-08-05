@@ -18,10 +18,15 @@ dependencies = [
     "matplotlib>=3.10.5",
     "nbstripout>=0.9.1",
     "numba>=0.66.0",
+    "numexpr>=2.14.2",
     "numpy>=2.3.2",
     "pandas>=2.3.1",
+    "qcircsim",
     "qutip>=5.2.0",
     "qutip-qip>=0.4.1",
     "scipy>=1.16.1",
     "tqdm>=4.67.1",
 ]
+
+[tool.uv.sources]
+qcircsim = { git = "https://github.com/neago/sciqis-qcircsim-claude.git" }

@@ -35,3 +35,21 @@
    - For those not sure how to get started, I will do a support session at the board
 5. ~~_Demo_: Classes in Python~~
 6. _Practice_: [Compare quantum circuit simulators](../exercises/compare-circuit-simulators.md)
+
+## Day 4
+
+1. Follow-up on yesterday
+2. Two final hours of working on your quantum circuit simulator and/or continuing the [Compare quantum circuit simulators](../exercises/compare-circuit-simulators.md) exercise
+3. _Pair review_: Show each other your simulator
+4. _Practice_: [Great and not-so-great plots](../exercises/great-and-not-so-great-plots.md)
+5. Making better graphics
+6. _Discussion_: Great and not-so-great plots
+7. _Demo_: Matplotlib
+8. [_Quiz_](https://vevox.app/#/m/136262325)
+9. _Practice_: [Improve my plot]()
+
+
+
+## Day 5
+
+11:45: Visit by Marjan and Ingrid from Skylab who will present their innovation and entrepreneurship opportunities

@@ -1,6 +1,6 @@
 # Program a quantum circuit simulator
 
-## A simple quantum circuit simulator
+_Mini-project_
 
 There are probably a hundred or more quantum computing simulators out there, but let's add to that count! :) Your first quantum information related exercise will be to simulate quantum circuits like this one (which you may recognise as the quantum teleportation circuit):
 
