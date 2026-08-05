@@ -33,5 +33,5 @@
 3. _Demo_: Einstein summation in NumPy
 4. _Mini-project_: Continue developing your [quantum circuit simulator](../exercises/quantum-circuit-simulator.md)
    - For those not sure how to get started, I will do a support session at the board
-5. _Demo_: Classes in Python
-6. _Practice_: Try other circuit simulators - instructions TBA
+5. ~~_Demo_: Classes in Python~~
+6. _Practice_: [Compare quantum circuit simulators](../exercises/compare-circuit-simulators.md)
