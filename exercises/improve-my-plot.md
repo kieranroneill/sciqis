@@ -2,7 +2,27 @@
 
 _Practice_
 
-Here is a fantastic plot I just made and plan to publish in a paper or thesis:
+Visualising data is a core skill of any scientist. It enables you to explore and understand your data and calculations, and to tell a story about the data to your audience. Apart from static plots, it can also be very useful to use animations or interactive plots to present and explore your data.
+
+Making beautiful AND informative plots or other visualisations is an art form that is very much worth investing some time into practicing. For communication of scientific results, your number one priority should be on conveying a clear and unambigous message that the recipient can understand with as little mental effort as possible. However, this often goes hand-in-hand with making the graphical style look pretty. 
+
+There are a bunch of very nice plotting libraries for Python, also many that do high-quality interactive visualisations. Prominent examples are [Plotly](https://plotly.com/python/), [Bokeh](https://bokeh.org), [Vega-Altair](https://altair-viz.github.io) and [seaborn](https://seaborn.pydata.org). It is fun to play around with these libraries and get inspiration for how to present data in clever, enlightening ways.
+Good old [Matplotlib](https://matplotlib.org) is however still the "industry standard" and go-to plotting tool for most scientists working in Python.
+
+
+
+Here is a fantastic plot for my thesis/paper that I just made with a few lines of standard matplotlib code,
+```python
+for i,nq in enumerate(n_qubits):
+    for j,nl in enumerate(n_layers):
+        print(f'\nLadder ansatz circuit with {nq} qubits and {nl} layers:\n')
+        run_ansatz(nq, nl, 0, True)  # purely to visualize circuits
+        plt.plot(thetas, ezs[i,j], label=f'{nq} qubits, {nl} layers')
+        plt.legend()
+plt.title('ladder ansatz circuit')
+plt.xlabel('theta')
+plt.ylabel('<Z..Z>')
+```
 
 ![Ansatz ladder plot with varied parameters](improve-my-plot-assets/ladder_ansatz.png)
 
