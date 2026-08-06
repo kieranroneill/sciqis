@@ -1,0 +1,12 @@
+[project]
+name = "visualisation"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.1",
+    "qcircsim",
+]
+
+[tool.uv.sources]
+qcircsim = { git = "https://github.com/neago/sciqis-qcircsim-claude.git" }
