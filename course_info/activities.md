@@ -53,4 +53,9 @@
 
 ## Day 5
 
+1. Follow-up on yesterday
+2. _Lecture_: States of a quantum harmonic oscillator, continuous variables
+3. _Practice_: [Tutorialize continuous variable states](../exercises/tutorialize_continuous_variables.md)
+4. _Demo_: Profiling and optimising code 
+
 11:45: Visit by Marjan and Ingrid from Skylab who will present their innovation and entrepreneurship opportunities
