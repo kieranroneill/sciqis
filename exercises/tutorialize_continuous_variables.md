@@ -11,6 +11,13 @@ Some of you are almost experts on CV quantum optics, some of you may have only b
 3. Gradually combine your findings into a nicely formatted single notebook. Include Markdown cells with section headers, explanatory text and formulas. Try to make a coherent narrative throughout. Don't worry too much about getting everything perfectly right – think of this as a first draft you might improve upon later.
 4. At the end of the day, submit your notebook as a pull request on the sciqis Github repository (instructions below). On Monday, you will give feedback to each other.
 
+There are four objectives of this exercise:
+* Practice writing a computational narrative in the form of a notebook with text, code, and static + interactive/animated plots.
+* Learn about continuous variables and Gaussian states.
+* Get more experience with visualising data or functions in an informative way, perhaps using interactive plots with ipywidgets or animated plots with Matplotlib's animation module.
+* Try out a Github pull request workflow.
+
+
 ### References
 
 In quantum optics, an important class of quantum states are those with Gaussian wavefunctions over the x-quadrature (often also called position or amplitude) variable. These include coherent states (which, approximately, is what comes out of a laser), thermal states (like a lightbulb), vacuum states (no photons - but still some noise due to Heisenberg), and squeezed states (non-classical states with many applications in QIP). 
@@ -22,6 +29,7 @@ There is a wonderfully elegant formalism for  Gaussian states, operations and me
 From a quantum computational perspective, however, Gaussian states are not so exciting: The wonderfully elegant formalism also allows for efficient classical simulation of Gaussian systems, meaning there's no quantum advantage to be found there. For many interesting applications, like quantum computing, we need to go non-Gaussian. 
 
 Continuous variable quantum information gets a lot more murky when going beyond Gaussianity. In all modesty, I think [my own PhD thesis](https://figshare.com/articles/thesis/Generation_of_single_photons_and_Schr_dinger_kitten_states_of_light/1328405?file=1939711) does a good job of introducing the basics of quantum states in the infinite-dimensional Hilbert space representing the quantum harmonic oscillator. It includes formalism that allows for representing both Gaussian and non-Gaussian states, in particular the density matrix and the Wigner function and the correspondence between them. Sections 2.1 and 2.2 should be all you will need for this exercise.
+
 
 ### Suggestions for things to investigate & present
 
