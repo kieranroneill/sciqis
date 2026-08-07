@@ -26,11 +26,30 @@ Continuous variable quantum information gets a lot more murky when going beyond 
 ### Suggestions for things to investigate & present
 
 * The photon number distribution for Fock (number) states $|n\rangle$, coherent states $|\alpha\rangle$, squeezed states, etc.  
-$p(n) = |\langle n|\psi\rangle|^2$ for pure states and $p(n) = \rho_{nn} = 2\pi \int\!\int_{-\infty}^{\infty}W(x,p)W_{|n\rangle\langle n|}(x,p) dxdp$ in general.
+$p(n) = |\langle n|\psi\rangle|^2$ for pure states and $p(n) = \rho_{nn} = 2\pi \int\int_{-\infty}^{\infty}W(x,p)W_{|n\rangle\langle n|}(x,p) dxdp$ in general.
 * Plotting the Wigner function for different states.
 * Animating/interactively visualising the Wigner function of states undergoing symplectic transformations like displacement, rotation, squeezing.
 * Implement the numerical conversion between density matrices and Wigner functions (my thesis, p.10). Density matrices in the Fock basis needs to be cut-off at a certain maximum photon number. This can introduce numerical issues for states like the coherent or squeezed states that have support on the full Hilbert space. See what happens if you convert a density matrix with a too low cutoff to its Wigner function. 
 
 ### Instructions for submission
 
-TBA
+Instead of just sharing your notebook on Discord, you will practice a Github pull request workflow:
+
+1. On Github, create a fork of https://github.com/qpit/sciqis ("Fork" button near top right).
+2. You now have a fork of the course repository under your own Github account. Clone this to your PC from your code editor or from the terminal with `git clone git@github.com:<your_github_username>/sciqis.git` or `git clone https://github.com/<your_github_username>/sciqis.git` (depending on your authorisation method).
+3. Create a branch (any name _branch_name_) with the purpose of contributing your tutorial notebook to the sciqis repository:  
+   ```
+   git checkout submissions
+   git checkout -b <branch_name>
+   ```
+1. Place your (mostly) finished notebook in the `/exercises/cv_submissions` folder. Name it exactly like this: `cv_tutorial_<name>.ipynb`  where `<name>` should preferably be your real name, but if you prefer not to use it (the notebook will appear on a public repository), it's ok to also use your github username instead. I.e. in my case, _cv_tutorial_jonas.ipynb_ or _cv_tutorial_neago.ipynb_.
+2. Commit the notebook to the new branch of your repository. Make sure you didn't add anything else than this notebook:  
+   ```
+   git add cv_tutorial_<name>.ipynb
+   git commit -m "Added my notebook"
+   ```
+3. Push it to your forked repository, `git push -u origin <branch_name>`.
+4. Going to your forked repository on Github, switch to your new branch. You should now see a green button  called "Compare & pull request" or similar. Choose `submissions` as the branch to merge into. Complete the form (quick title and description, nothing fancy - would be good to include your name or username in the description) and Create Pull Request. Detailed instructions are [here](https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request). 
+5. Confirm that the pull request is visible in the main course repository: https://github.com/qpit/sciqis/pulls
+
+In case this doesn't work at all, the fallback solution is to send your notebook to me by direct message on Discord.
